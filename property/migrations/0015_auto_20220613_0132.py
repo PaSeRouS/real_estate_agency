@@ -7,7 +7,17 @@ def set_flat_to_owner(apps, schema_editor):
     Owner = apps.get_model('property', 'Owner')
     Flat = apps.get_model('property', 'Flat')
 
-    for flat in Flat.objects.all():
+    flats = Flat.objects.all()
+    for flat in flats.iterator():
+        owner = Owner.objects.get(
+            phonenumber=flat.owners_phonenumber
+        )
+        if owner:
+            owner.full_name = flat.owner
+            owner.save()
+
+    flats = Flat.objects.all()
+    for flat in flats.iterator():
         owner = Owner.objects.get(
             full_name=flat.owner,
             phonenumber=flat.owners_phonenumber,
@@ -21,7 +31,7 @@ def set_flat_to_owner(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('property', '0014_auto_20220613_0120'),
+        ('property', '0013_auto_20220613_0119'),
     ]
 
     operations = [
