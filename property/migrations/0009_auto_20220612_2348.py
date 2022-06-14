@@ -6,7 +6,8 @@ from django.db import migrations
 def parse_phonenumber(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
 
-    for flat in Flat.objects.all():
+    flats = Flat.objects.all()
+    for flat in flats.iterator():
         flat.owner_pure_phone  = phonenumbers.parse(
             flat.owners_phonenumber,
             'RU'
