@@ -5,11 +5,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Flat(models.Model):
-    owner_pure_phone = PhoneNumberField(
-        'Нормализованный номер владельца',
-        blank=True
-    )
-
     created_at = models.DateTimeField(
         'Когда создано объявление',
         default=timezone.now,
