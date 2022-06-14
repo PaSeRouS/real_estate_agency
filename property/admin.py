@@ -8,6 +8,7 @@ class OwnersInline(admin.TabularInline):
     raw_id_fields = ('owner',)
 
 
+@admin.register(Flat)
 class FlatAdmin(admin.ModelAdmin):
     search_fields = ('owner', 'town', 'address',)
     
@@ -30,15 +31,11 @@ class FlatAdmin(admin.ModelAdmin):
     inlines = (OwnersInline,)
 
 
+@admin.register(Complaint)
 class ComplaintAdmin(admin.ModelAdmin):
     raw_id_fields = ("flat",)
 
 
+@admin.register(Owner)
 class OwnerAdmin(admin.ModelAdmin):
     raw_id_fields = ("flats",)
-
-
-
-admin.site.register(Complaint, ComplaintAdmin)
-admin.site.register(Flat, FlatAdmin)
-admin.site.register(Owner, OwnerAdmin)
