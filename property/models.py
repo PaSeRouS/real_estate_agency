@@ -89,8 +89,8 @@ class Owner(models.Model):
     full_name = models.CharField(
         'ФИО владельца',
         max_length=200,
-        db_index=True,
-        default='Без имени')
+        db_index=True
+    )
     
     pure_phone = PhoneNumberField(
         'Нормализованный номер владельца',
